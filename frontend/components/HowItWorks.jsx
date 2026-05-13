@@ -8,7 +8,7 @@ const STEPS = [
     icon: '📸',
     title: 'Upload Image',
     description:
-      'Choose any image from your device. JPG, PNG, WEBP — sab chalega!',
+      'Choose any image from your device. JPG, PNG, and WEBP — all formats are supported.!',
     color: 'from-purple-500 to-purple-700',
     shadow: 'shadow-purple-500/30',
     border: 'border-purple-200 dark:border-purple-800',
@@ -19,7 +19,7 @@ const STEPS = [
     icon: '🤖',
     title: 'AI Processes',
     description:
-      'Google Gemini AI tumhari image analyze karta hai aur magic karta hai!',
+      'Google Gemini analyzes your image and works like magic.!',
     color: 'from-pink-500 to-pink-700',
     shadow: 'shadow-pink-500/30',
     border: 'border-pink-200 dark:border-pink-800',
@@ -30,7 +30,7 @@ const STEPS = [
     icon: '✨',
     title: 'Caption Ready!',
     description:
-      'Creative caption with hashtags and emojis — copy karo aur post karo!',
+      'Creative caption with hashtags and emojis — just copy and post!',
     color: 'from-indigo-500 to-indigo-700',
     shadow: 'shadow-indigo-500/30',
     border: 'border-indigo-200 dark:border-indigo-800',
