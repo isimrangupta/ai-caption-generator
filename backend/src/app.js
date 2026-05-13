@@ -7,8 +7,9 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors({
-  origin: "https://ai-caption-generator-omega.vercel.app",  
-  credentials: true,               
+  origin: ["https://ai-caption-generator-omega.vercel.app"],  
+  credentials: true, 
+  methods: ["GET", "POST", "PUT", "DELETE"],           
 }));
 
 app.use(express.json());

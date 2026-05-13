@@ -30,6 +30,7 @@ async function registerController(req, res) {
       httpOnly: true,
       secure:true,
       sameSite: "none",
+       path: '/',
       maxAge: 24 * 60 * 60 * 1000
     });
 
@@ -78,6 +79,7 @@ async function loginController(req, res) {
       httpOnly: true,
       secure:true,
       sameSite: "none",
+      path: '/',
       maxAge: 24 * 60 * 60 * 1000
     });
 
