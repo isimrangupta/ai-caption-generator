@@ -50,10 +50,7 @@ export default function LoginPage() {
         }
       );
 
-      // Save Token
-      Cookies.set("token", response.data.token, {
-        expires: 1,
-      });
+     
 
       router.refresh()
       setTimeout(() => {

@@ -60,10 +60,7 @@ export default function RegisterPage() {
         }
       );
 
-      // Save Token
-      Cookies.set("token", response.data.token, {
-        expires: 1,
-      });
+    
 
       router.refresh()
       setTimeout(() => {

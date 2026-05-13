@@ -26,9 +26,10 @@ async function registerController(req, res) {
       process.env.JWT_SECRET
     );
 
-    res.cookie("token", token, {
-      httpOnly: false,
-      sameSite: "lax",
+ res.cookie("token", token, {
+      httpOnly: true,
+      secure:true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000
     });
 
@@ -74,8 +75,9 @@ async function loginController(req, res) {
     );
 
     res.cookie("token", token, {
-      httpOnly: false,
-      sameSite: "lax",
+      httpOnly: true,
+      secure:true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000
     });
 
