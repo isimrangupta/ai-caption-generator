@@ -4,8 +4,8 @@ const connectDB = require('./src/db/db')
 
 connectDB()
 
-const POART = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(POART, () => {
-    console.log("server is running on port", POART)
+app.listen(PORT, () => {
+    console.log("server is running on port", PORT)
 })
