@@ -70,7 +70,7 @@ export default function DashboardPage() {
 
       setCaption(response.data.post.caption);
     } catch (err) {
-      setError("Caption generate nahi hua. Dobara try karo!");
+      setError("😔 Oops! Caption generation failed. Please try again.!");
       console.error(err);
     } finally {
       setLoading(false);
