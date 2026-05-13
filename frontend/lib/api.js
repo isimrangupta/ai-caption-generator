@@ -1,9 +1,20 @@
-// lib/api.js
-import axios from 'axios'
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const API = axios.create({
-  baseURL: 'https://ai-caption-generator-aytk.onrender.com',
-  withCredentials: true  
-})
+  baseURL: "https://ai-caption-generator-aytk.onrender.com",
+  withCredentials: true,
+});
 
-export default API
+API.interceptors.request.use((config) => {
+
+  const token = Cookies.get("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export default API;
