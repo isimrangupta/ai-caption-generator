@@ -9,6 +9,7 @@ export default function DashboardPage() {
   // LOGIN STATE
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   // STATES
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,12 +19,22 @@ export default function DashboardPage() {
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
 
+  const fetchPosts = async () => {
+    try{
+      const response = await API.get("/api/posts")
+      setPosts(response.data.posts)
+    } catch(error){
+      console.log(error)
+    }
+  };
+
   // FIX HYDRATION
   useEffect(() => {
     setMounted(true);
 
     const token = Cookies.get("token");
     setIsLoggedIn(!!token);
+    fetchPosts();
   }, []);
 
   // FILE CHANGE
@@ -69,6 +80,7 @@ export default function DashboardPage() {
       });
 
       setCaption(response.data.post.caption);
+      fetchPosts();
     } catch (err) {
       setError("😔 Oops! Caption generation failed. Please try again.!");
       console.error(err);
@@ -455,6 +467,69 @@ export default function DashboardPage() {
         </AnimatePresence>
       </motion.div>
     </motion.div>
+
+    {/* HISTORY SECTION */}
+
+<div className="w-full max-w-6xl mt-14 z-10">
+
+  <h2
+    className="text-3xl font-bold
+               text-gray-800 dark:text-white
+               mb-8"
+  >
+    Your Generated Captions
+  </h2>
+
+  <div
+    className="grid
+               grid-cols-1
+               md:grid-cols-2
+               lg:grid-cols-3
+               gap-6"
+  >
+
+    {posts.map((post) => (
+
+      <div
+        key={post._id}
+
+        className="bg-white dark:bg-gray-800
+                   rounded-3xl
+                   overflow-hidden
+                   shadow-xl"
+      >
+
+        <img
+          src={post.image}
+          alt="Post"
+
+          className="w-full h-60 object-cover"
+        />
+
+        <div className="p-5">
+
+          <p
+            className="text-gray-700
+                       dark:text-gray-300
+                       mb-4"
+          >
+            {post.caption}
+          </p>
+
+          <button
+            className="w-full
+                       bg-red-500 hover:bg-red-600
+                       text-white py-2
+                       rounded-2xl"
+          >
+            🗑 Delete
+          </button>
+
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
     </>
   );
 }

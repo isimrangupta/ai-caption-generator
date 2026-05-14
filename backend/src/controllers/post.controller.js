@@ -24,4 +24,56 @@ async function createPostController(req, res) {
   });
 }
 
-module.exports = { createPostController };
+async function getPostsController(req, res) {
+
+  try {
+
+    const posts = await postModel.find({
+      user: req.user._id
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      posts
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: "Failed to fetch posts"
+    });
+  }
+}
+
+async function deletePostController(req, res) {
+
+  try {
+
+    const post = await postModel.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id
+    });
+
+    if (!post) {
+
+      return res.status(404).json({
+        message: "Post not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Post deleted successfully"
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: "Failed to delete post"
+    });
+  }
+}
+
+module.exports = { 
+  createPostController,
+  getPostsController,
+  deletePostController
+};
