@@ -470,65 +470,215 @@ export default function DashboardPage() {
 
     {/* HISTORY SECTION */}
 
-<div className="w-full max-w-6xl mt-14 z-10">
+<div className="w-full max-w-7xl mt-16 z-10">
 
-  <h2
-    className="text-3xl font-bold
-               text-gray-800 dark:text-white
-               mb-8"
-  >
-    Your Generated Captions
-  </h2>
+  {/* HEADING */}
+  <div className="flex items-center justify-between mb-8">
 
-  <div
-    className="grid
-               grid-cols-1
-               md:grid-cols-2
-               lg:grid-cols-3
-               gap-6"
-  >
-
-    {posts.map((post) => (
-
-      <div
-        key={post._id}
-
-        className="bg-white dark:bg-gray-800
-                   rounded-3xl
-                   overflow-hidden
-                   shadow-xl"
+    <div>
+      <h2
+        className="text-3xl md:text-4xl
+                   font-extrabold
+                   bg-gradient-to-r
+                   from-purple-500 via-pink-500 to-purple-500
+                   bg-clip-text text-transparent"
       >
+        History
+      </h2>
 
-        <img
-          src={post.image}
-          alt="Post"
+      <p className="text-gray-500 dark:text-gray-400 mt-2">
+        Your previously generated AI captions
+      </p>
+    </div>
 
-          className="w-full h-60 object-cover"
-        />
+    <div
+      className="hidden md:flex
+                 items-center gap-2
+                 bg-white/60 dark:bg-gray-800/60
+                 backdrop-blur-xl
+                 px-4 py-2 rounded-2xl
+                 border border-white/20 dark:border-gray-700"
+    >
+      <span>✨</span>
 
-        <div className="p-5">
+      <span className="text-sm text-gray-700 dark:text-gray-300">
+        {posts.length} Captions
+      </span>
+    </div>
 
-          <p
-            className="text-gray-700
-                       dark:text-gray-300
-                       mb-4"
-          >
-            {post.caption}
-          </p>
-
-          <button
-            className="w-full
-                       bg-red-500 hover:bg-red-600
-                       text-white py-2
-                       rounded-2xl"
-          >
-            🗑 Delete
-          </button>
-
-        </div>
-      </div>
-    ))}
   </div>
+
+  {/* EMPTY STATE */}
+
+  {posts.length === 0 ? (
+
+    <div
+      className="bg-white/60 dark:bg-gray-800/60
+                 backdrop-blur-2xl
+                 border border-white/20 dark:border-gray-700
+                 rounded-3xl
+                 p-12
+                 flex flex-col items-center
+                 justify-center
+                 text-center"
+    >
+      <div className="text-6xl mb-4">
+        📂
+      </div>
+
+      <h3
+        className="text-2xl font-bold
+                   text-gray-700 dark:text-white mb-2"
+      >
+        No History Yet
+      </h3>
+
+      <p className="text-gray-500 dark:text-gray-400">
+        Generate your first AI caption and it will appear here.
+      </p>
+    </div>
+
+  ) : (
+
+    <div
+      className="grid
+                 grid-cols-1
+                 sm:grid-cols-2
+                 xl:grid-cols-3
+                 gap-7"
+    >
+
+      {posts.map((post, index) => (
+
+        <motion.div
+          key={post._id}
+
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+
+          transition={{
+            delay: index * 0.05
+          }}
+
+          whileHover={{
+            y: -6
+          }}
+
+          className="group
+                     bg-white/70 dark:bg-gray-800/70
+                     backdrop-blur-2xl
+                     border border-white/20 dark:border-gray-700
+                     rounded-[28px]
+                     overflow-hidden
+                     shadow-xl
+                     hover:shadow-2xl
+                     transition-all duration-500"
+        >
+
+          {/* IMAGE */}
+
+          <div className="relative overflow-hidden">
+
+            <img
+              src={post.image}
+              alt="Post"
+
+              className="w-full
+                         h-64
+                         object-cover
+                         group-hover:scale-105
+                         transition-transform duration-700"
+            />
+
+            {/* OVERLAY */}
+
+            <div
+              className="absolute inset-0
+                         bg-gradient-to-t
+                         from-black/50
+                         via-black/10
+                         to-transparent"
+            />
+
+            {/* BADGE */}
+
+            <div
+              className="absolute top-4 left-4
+                         bg-white/20
+                         backdrop-blur-xl
+                         px-3 py-1
+                         rounded-full
+                         text-white text-sm"
+            >
+              ✨ AI Caption
+            </div>
+
+          </div>
+
+          {/* CONTENT */}
+
+          <div className="p-5">
+
+            {/* CAPTION */}
+
+            <div
+              className="bg-gray-100/80 dark:bg-gray-700/60
+                         rounded-2xl
+                         p-4
+                         min-h-[120px]
+                         mb-5"
+            >
+              <p
+                className="text-gray-700 dark:text-gray-300
+                           leading-relaxed
+                           text-sm md:text-base"
+              >
+                {post.caption}
+              </p>
+            </div>
+
+            {/* BUTTONS */}
+
+            <div className="flex gap-3">
+
+              {/* COPY BUTTON */}
+
+              <button
+                onClick={() => navigator.clipboard.writeText(post.caption)}
+
+                className="flex-1
+                           bg-purple-600 hover:bg-purple-700
+                           text-white
+                           py-3
+                           rounded-2xl
+                           transition-all duration-300
+                           hover:scale-[1.02]"
+              >
+                📋 Copy
+              </button>
+
+              {/* DELETE BUTTON */}
+
+              <button
+                className="flex-1
+                           bg-red-500 hover:bg-red-600
+                           text-white
+                           py-3
+                           rounded-2xl
+                           transition-all duration-300
+                           hover:scale-[1.02]"
+              >
+                🗑 Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </motion.div>
+      ))}
+    </div>
+  )}
 </div>
     </>
   );
