@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import API from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
+import {Sparkles} from "lucide-react"
 
 export default function DashboardPage() {
 
@@ -469,13 +470,19 @@ export default function DashboardPage() {
                        xl:grid-cols-4
                        gap-6"
           >
-
+<AnimatePresence>
             {posts.map((post, index) => (
 
               <motion.div
                 key={post._id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  scale:0.7,
+                  opacity:0,
+                  rotate:-8,
+                  filter:"blur(12px)"
+                }}
                 transition={{ delay: index * 0.05 }}
 
                 whileHover={{
@@ -530,7 +537,7 @@ export default function DashboardPage() {
                                  p-2 rounded-full
                                  transition-all duration-300"
                     >
-                      🗑
+                      <Sparkles className="w-4 h-4"/>
                     </button>
                   </div>
 
@@ -587,6 +594,7 @@ export default function DashboardPage() {
                 </div>
               </motion.div>
             ))}
+            </AnimatePresence>
           </div>
         )}
       </motion.div>
