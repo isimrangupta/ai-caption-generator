@@ -273,8 +273,8 @@ export default function HeroSection() {
                      gap-6 md:gap-16 flex-wrap"
         >
           {[
-            { number: '10K+', label: 'Captions Generated', icon: '✨' },
-            { number: '5K+',  label: 'Happy Users',        icon: '😊' },
+            { number: '50+', label: 'Captions Generated', icon: '✨' },
+            { number: '100+',  label: 'Happy Users',        icon: '😊' },
             { number: '2s',   label: 'Generation Time',    icon: '⚡' },
             { number: '99%',  label: 'Accuracy',           icon: '🎯' },
           ].map((stat, i) => (
